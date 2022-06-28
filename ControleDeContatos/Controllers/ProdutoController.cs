@@ -18,13 +18,34 @@ namespace ControleDeContatos.Controllers
 
         public IActionResult Index()
         {
-            List<ProdutoModel> produto = _produtoRepositorio.BuscarTodos();
-            return View(produto);
+            List<ProdutoModel> produtos = _produtoRepositorio.BuscarTodos();
+            return View(produtos);
         }
 
         public IActionResult Adicionar()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Adicionar(ProdutoModel produto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _produtoRepositorio.Adicionar(produto);
+                    TempData["MensagemSucesso"] = "Produto cadastrado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+
+                return View(produto);
+            }
+            catch (Exception error)
+            {
+                TempData["MensagemErro"] = "Ops!, não foi possível cadastrar seu produto, tente novamente!" + " Error: " + error.Message;
+                return RedirectToAction("Index");
+            }
         }
     }
 }
