@@ -9,7 +9,9 @@ namespace ControleDeContatos.Repositorio
     public interface iProdutoRepositorio
     {
         List<ProdutoModel> BuscarTodos();
-
+        ProdutoModel BuscaPorID(int ID);
         ProdutoModel Adicionar(ProdutoModel produto);
+        ProdutoModel AlterarProduto(ProdutoModel produto);
+        bool Excluir(int ID);
     }
 }
