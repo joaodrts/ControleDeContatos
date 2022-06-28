@@ -58,7 +58,7 @@ namespace ControleDeContatos.Controllers
             }
             catch (Exception error)
             {
-                TempData["MensagemSucesso"] = "Ops!, não foi possível excluir seu contato, tente novamente!";
+                TempData["MensagemSucesso"] = "Ops!, não foi possível excluir seu contato, tente novamente!" + " Error: " + error.Message;
                 return RedirectToAction("Index");
             }
         }
@@ -79,7 +79,7 @@ namespace ControleDeContatos.Controllers
             }
             catch (Exception error)
             {
-                TempData["MensagemErro"] = "Ops!, não foi possível cadastrar seu contato, tente novamente!";
+                TempData["MensagemErro"] = "Ops!, não foi possível cadastrar seu contato, tente novamente!" + " Error: " + error.Message;
                 return RedirectToAction("Index");
             }
         }
@@ -100,7 +100,7 @@ namespace ControleDeContatos.Controllers
             }
             catch (Exception error)
             {
-                TempData["MensagemErro"] = "Ops!, não foi possível alterar seu contato, tente novamente!";
+                TempData["MensagemErro"] = "Ops!, não foi possível alterar seu contato, tente novamente!" + " Error: " + error.Message;
                 return RedirectToAction("Index");
             }
         }
