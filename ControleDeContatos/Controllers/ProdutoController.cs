@@ -47,5 +47,61 @@ namespace ControleDeContatos.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public IActionResult Alterar(ProdutoModel produto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _produtoRepositorio.AlterarProduto(produto);
+                    TempData["MensagemSucesso"] = "Produto alterado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+
+                return View("Editar", produto);
+
+            } catch(Exception error)
+            {
+                TempData["MensagemErro"] = "Ops!, não foi possível alterar o cadastro do produto, tente novamente!" + " Error: " + error.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult Editar(int ID)
+        {
+            ProdutoModel produto = _produtoRepositorio.BuscaPorID(ID);
+            return View(produto);
+        }
+
+        public IActionResult Excluir(int ID)
+        {
+            try
+            {
+                bool excluido = _produtoRepositorio.Excluir(ID);
+
+                if (excluido)
+                {
+                    TempData["MensagemSucesso"] = "Produto excluido com sucesso!";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Ops!, ocorreu um problema na exclusão do produto, tente novamente!";
+                }
+
+                return RedirectToAction("Index");
+
+            }catch(Exception error)
+            {
+                TempData["MensagemErro"] = "Ops!, ocorreu um problema na exclusão do produto, tente novamente!" + " Error: " + error.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult ExcluirConfirmacao(int ID)
+        {
+            ProdutoModel produto = _produtoRepositorio.BuscaPorID(ID);
+            return View(produto);
+        }
     }
 }
