@@ -17,5 +17,6 @@ namespace ControleDeContatos.Models
         public double ValorVenda { get; set; }
         [Required(ErrorMessage = "Digite o estoque do produto")]
         public double Estoque { get; set; }
+        public bool? Excluido { get; set; }
     }
 }

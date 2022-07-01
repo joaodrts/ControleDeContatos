@@ -28,7 +28,7 @@ namespace ControleDeContatos.Repositorio
         {
             ProdutoModel produtoDB = BuscaPorID(produto.ID);
 
-            if (produtoDB.ID == 0 || produtoDB.ID == null) throw new Exception("Houve um erro na atualização do produto!");
+            if (produtoDB.ID == 0) throw new Exception("Houve um erro na atualização do produto!");
 
             produtoDB.Descricao = produto.Descricao;
             produtoDB.ValorCusto = produto.ValorCusto;
@@ -48,16 +48,18 @@ namespace ControleDeContatos.Repositorio
 
         public List<ProdutoModel> BuscarTodos()
         {
-            return _bancoContext.Produtos.ToList();
+            return _bancoContext.Produtos.Where(x => x.Excluido == null).ToList();
         }
 
         public bool Excluir(int ID)
         {
             ProdutoModel produtoDB = BuscaPorID(ID);
 
-            if (produtoDB.ID == 0 || produtoDB.ID == null) throw new Exception("Ops!, ocorreu um problema na exclusão do produto, tente novamente!");
+            if (produtoDB.ID == 0) throw new Exception("Ops!, ocorreu um problema na exclusão do produto, tente novamente!");
 
-            _bancoContext.Produtos.Remove(produtoDB);
+            produtoDB.Excluido = true;
+
+            _bancoContext.Produtos.Update(produtoDB);
             _bancoContext.SaveChanges();
 
             return true;

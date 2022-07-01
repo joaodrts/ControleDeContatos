@@ -22,7 +22,9 @@ namespace ControleDeContatos.Repositorio
 
             if (contatoDB.ID == 0) throw new Exception("Houve um erro na exclusão do contato!");
 
-            _bancoContext.Contatos.Remove(contatoDB);
+            contatoDB.Excluido = true;
+
+            _bancoContext.Contatos.Update(contatoDB);
             _bancoContext.SaveChanges();
 
             return true;
@@ -52,7 +54,7 @@ namespace ControleDeContatos.Repositorio
 
         public List<ContatoModel> BuscarTodos()
         {
-            return _bancoContext.Contatos.ToList();
+            return _bancoContext.Contatos.Where(x => x.Excluido == null).ToList();
         }
 
         public ContatoModel Adicionar(ContatoModel Contato)
