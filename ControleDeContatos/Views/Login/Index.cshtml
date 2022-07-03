@@ -1,21 +1,42 @@
-﻿
+﻿@model UsuarioModel
 @{
     ViewData["Title"] = "Login";
 }
 
 <h1 class="display-4">Login</h1>
 
-<form>
+<form asp-controller="Login" asp-action="Logar" method="post">
+
+    <br />
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
     <!-- Email input -->
     <div class="form-outline mb-4">
-        <input type="email" id="form2Example1" class="form-control" />
-        <label class="form-label" for="email">Email</label>
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" asp-for="Email" placeholder="Informe o email" />
+        @Html.ValidationMessageFor(x => x.Email)
     </div>
 
     <!-- Password input -->
     <div class="form-outline mb-4">
-        <input type="password" id="form2Example2" class="form-control" />
-        <label class="form-label" for="senha">Senha</label>
+        <label class="form-label">Senha</label>
+        <input type="password" class="form-control" asp-for="Senha" placeholder="Informe a senha" />
+        @Html.ValidationMessageFor(x => x.Senha)
     </div>
 
     <!-- 2 column grid layout for inline styling -->
@@ -27,10 +48,10 @@
     </div>
 
     <!-- Submit button -->
-    <button type="button" class="btn btn-primary btn-block mb-4">Entrar</button>
+    <button type="submit" class="btn btn-primary btn-block mb-4">Entrar</button>
 
     <!-- Register buttons -->
     <div class="text-center">
-        <p>Não possuí conta? <a role="link" asp-controller="Usuario" asp-action="Registrar" >Registrar</a></p>
+        <p>Não possuí conta? <a role="link" asp-controller="Usuario" asp-action="Registrar">Registrar</a></p>
     </div>
 </form>
