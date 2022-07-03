@@ -3,7 +3,6 @@ using ControleDeContatos.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ControleDeContatos.Repositorio
 {
@@ -54,7 +53,7 @@ namespace ControleDeContatos.Repositorio
 
         public List<ContatoModel> BuscarTodos()
         {
-            return _bancoContext.Contatos.Where(x => x.Excluido == null).ToList();
+            return _bancoContext.Contatos.Where(x => x.Excluido == null).OrderBy(x => x.ID).ToList();
         }
 
         public ContatoModel Adicionar(ContatoModel Contato)

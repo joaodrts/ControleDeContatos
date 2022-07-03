@@ -3,7 +3,6 @@ using ControleDeContatos.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ControleDeContatos.Repositorio
 {
@@ -48,7 +47,7 @@ namespace ControleDeContatos.Repositorio
 
         public List<ProdutoModel> BuscarTodos()
         {
-            return _bancoContext.Produtos.Where(x => x.Excluido == null).ToList();
+            return _bancoContext.Produtos.Where(x => x.Excluido == null).OrderBy(x => x.ID).ToList();
         }
 
         public bool Excluir(int ID)

@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1 class="display-4">Login</h1>
+
+<form>
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+        <input type="email" id="form2Example1" class="form-control" />
+        <label class="form-label" for="email">Email</label>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+        <input type="password" id="form2Example2" class="form-control" />
+        <label class="form-label" for="senha">Senha</label>
+    </div>
+
+    <!-- 2 column grid layout for inline styling -->
+    <div class="row mb-4">
+        <div class="col">
+            <!-- Simple link -->
+            <a href="#!">Recuperar senha?</a>
+        </div>
+    </div>
+
+    <!-- Submit button -->
+    <button type="button" class="btn btn-primary btn-block mb-4">Entrar</button>
+
+    <!-- Register buttons -->
+    <div class="text-center">
+        <p>Não possuí conta? <a role="link" asp-controller="Usuario" asp-action="Registrar" >Registrar</a></p>
+    </div>
+</form>

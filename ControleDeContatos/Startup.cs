@@ -1,5 +1,6 @@
 using ControleDeContatos.Data;
 using ControleDeContatos.Repositorio;
+using ControleDeContatos.Repositorio.Usuario;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,8 @@ namespace ControleDeContatos
                 .AddScoped<iContatoRepositorio, ContatoRepositorio>();
             services
                 .AddScoped<iProdutoRepositorio, ProdutoRepositorio>();
+            services
+                .AddScoped<iUsuarioRepositorio, UsuarioRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +60,7 @@ namespace ControleDeContatos
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }
