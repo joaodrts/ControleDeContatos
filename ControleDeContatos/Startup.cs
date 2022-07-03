@@ -1,5 +1,6 @@
 using ControleDeContatos.Data;
 using ControleDeContatos.Repositorio;
+using ControleDeContatos.Repositorio.Login;
 using ControleDeContatos.Repositorio.Usuario;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,8 @@ namespace ControleDeContatos
                 .AddScoped<iProdutoRepositorio, ProdutoRepositorio>();
             services
                 .AddScoped<iUsuarioRepositorio, UsuarioRepositorio>();
+            services
+                .AddScoped<iLoginRepositorio, LoginRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
